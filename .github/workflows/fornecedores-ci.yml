@@ -1,0 +1,23 @@
+name: Fornecedores ci
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Compilar fornecedores-service com maven
+        working-directory: fornecedores-service
+        run: mvn clean package -DskipTests
